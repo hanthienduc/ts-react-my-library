@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { book } from "../interfaces/book"
+import { book } from "../interfaces/Book"
 import { api_base } from "../utilities/apiUrl"
 
 export function useBooks() {

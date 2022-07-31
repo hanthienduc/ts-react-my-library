@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom"
-import { book } from "../interfaces/book"
+import { Book } from "../interfaces/book"
 
 type BookGridProps = {
-    books: book[],
+    books: Book[],
     large: boolean
 }
 export function BookGrid({ books: books, large }: BookGridProps) {

@@ -30,13 +30,13 @@ router.post('/new', async (req, res) => {
     try {
         const newAuthor = await author.save()
         // res.redirect(`authors/${newAuthor.id}`)
-        res.json({ id: newAuthor.id })
+        res.status(200).json({ id: newAuthor.id })
     } catch (err) {
         // res.render('authors/new', {
         //     author: author,
         //     errorMessage: 'Error creating Author'
         // })
-        res.json({ author: author, errorMessage: 'Error creating Author' })
+        res.status(500).json({ author: author, errorMessage: 'Error creating Author' })
     }
 })
 
@@ -55,16 +55,16 @@ router.get('/:id', async (req, res) => {
     }
 })
 
-router.get('/:id/edit', async (req, res) => {
-    try {
-        const author = Author.findById(req.params.id)
-        res.json({ author: author })
-    } catch {
-        res.json({ error: 'error edit user' })
-    }
-})
+// router.get('/:id/edit', async (req, res) => {
+//     try {
+//         const author = Author.findById(req.params.id)
+//         res.json({ author: author })
+//     } catch {
+//         res.json({ error: 'error edit user' })
+//     }
+// })
 
-router.put('/:id', async (req, res) => {
+router.put('/update/:id', async (req, res) => {
     let author
     try {
         author = await Author.findById(req.params.id)
@@ -85,12 +85,13 @@ router.put('/:id', async (req, res) => {
     }
 })
 
-router.delete('/:id', async (req, res) => {
+router.delete('/delete/:id', async (req, res) => {
     let author
     try {
         author = await Author.findById(req.params.id)
         await author.remove()
-        res.redirect(`/authors`)
+        // res.redirect(`/authors`)
+        res.json({ id: author._id });
     } catch (err) {
         if (author == null) {
             res.redirect('/')

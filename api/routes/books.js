@@ -32,7 +32,7 @@ router.get('/', async (req, res) => {
 })
 
 // New Book Route
-router.get('/new', async (req, res) => {
+router.post('/new', async (req, res) => {
     renderNewPage(res, new Book())
 })
 
