@@ -1,5 +1,7 @@
+import { nanoid } from "nanoid"
 import { Link } from "react-router-dom"
-import { Book } from "../interfaces/book"
+import { Book } from "../interfaces/Book"
+import { getCoverImagePath } from "../utilities/getCoverImagePath"
 
 type BookGridProps = {
     books: Book[],
@@ -10,10 +12,9 @@ export function BookGrid({ books: books, large }: BookGridProps) {
     const bookGridClass = large ? 'book-grid-large' : ''
 
     const bookElements = books.map(book => {
-        const base64String = btoa(String.fromCharCode(...new Uint8Array(book.coverImage.data)));
-        const coverImagePath = `data:image/png;base64,${base64String}`
-        return <Link key={book.id} to={`/books/:${book.id}`}>
-            <img className={`book-cover ${bookCoverClass}`} src={coverImagePath} />
+        return <Link key={nanoid()} to={`/books/${book._id}`}>
+            <img className={`book-cover ${bookCoverClass}`}
+                src={getCoverImagePath(book.coverImage.data)} />
         </Link>
     })
     return (

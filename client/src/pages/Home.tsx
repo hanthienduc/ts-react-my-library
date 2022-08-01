@@ -1,12 +1,9 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { BookGrid } from "../components/BookGrid"
-import { useBooks } from "../hooks/useBooks"
-import { book } from "../interfaces/Book"
-import { api_base } from "../utilities/apiUrl"
-
+import { BookContext } from "../context/BookContext"
 export function Home() {
 
-    const { books } = useBooks()
+    const { books } = useContext(BookContext)
 
     return (
         <div>

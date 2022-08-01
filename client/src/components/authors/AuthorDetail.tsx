@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import { Author, AuthorContext } from "../../context/AuthorContext"
-import { Book } from "../../interfaces/book"
+import { Book } from "../../interfaces/Book"
 import { api_base } from "../../utilities/apiUrl"
 import { BookGrid } from "../BookGrid"
 

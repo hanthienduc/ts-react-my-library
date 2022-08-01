@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
-import { book } from "../interfaces/Book"
+import { Book } from "../interfaces/book"
 import { api_base } from "../utilities/apiUrl"
 
 export function useBooks() {
-    const [books, setBooks] = useState<book[]>([])
+    const [books, setBooks] = useState<Book[]>([])
 
     useEffect(() => {
         getBooks()
