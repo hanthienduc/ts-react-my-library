@@ -9,6 +9,23 @@ const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif']
 router.get('/', async (req, res) => {
 
     let query = Book.find()
+    try {
+        const books = await query.exec()
+        // res.render('books/index', {
+        //     books: books,
+        //     searchOptions: req.query
+        // })
+        res.json({ books: books })
+    } catch (err) {
+        res.redirect('/')
+    }
+
+})
+
+// Search book route
+router.get('/search?', async (req, res) => {
+
+    let query = Book.find()
     if (req.query.title != null && req.query.title != '') {
         query = query.regex('title', new RegExp(req.query.title, 'i'))
     }
@@ -31,10 +48,11 @@ router.get('/', async (req, res) => {
 
 })
 
-// New Book Route
-router.post('/new', async (req, res) => {
-    renderNewPage(res, new Book())
-})
+
+// // New Book Route
+// router.post('/new', async (req, res) => {
+//     renderNewPage(res, new Book())
+// })
 
 // Create Book route
 router.post('/', async (req, res) => {
@@ -44,14 +62,16 @@ router.post('/', async (req, res) => {
         publishDate: new Date(req.body.publishDate),
         pageCount: req.body.pageCount,
         description: req.body.description,
+        // fileEncodeDataURL: req.body.fileEncodeDataURL
     })
-    saveCover(book, req.body.cover)
+    // saveCover(book, req.body.cover)
     try {
         const newBook = await book.save()
         // res.redirect(`books/${newBook.id}`)
         res.json({ bookId: newBook.id })
     } catch (err) {
-        renderNewPage(res, book, true)
+        // renderNewPage(res, book, true)
+        res.json({ book: book })
     }
 })
 
@@ -72,7 +92,8 @@ router.get('/:id', async (req, res) => {
 router.get('/:id/edit', async (req, res) => {
     try {
         const book = await Book.findById(req.params.id)
-        renderEditPage(res, book)
+        // renderEditPage(res, book)
+        res.json({ book: book })
     } catch {
         res.redirect('/')
     }
@@ -94,11 +115,12 @@ router.put('/:id', async (req, res) => {
         await book.save()
 
         // res.redirect(`/books/${book.id}`)
-        res.json({bookId: book.id})
+        res.json({ bookId: book.id })
 
     } catch (err) {
         if (book != null) {
-            renderEditPage(res, book, true)
+            // renderEditPage(res, book, true)
+            res.json({ book: book })
         } else {
             res.redirect('/')
         }
