@@ -6,9 +6,6 @@ export interface Book {
     description: string,
     publishDate: Date,
     pageCount: number,
-    coverImage: {
-        data: []
-    },
-    coverImageType: string,
-    author: Author
+    fileEncodeDataURL: string
+    author: Author 
 }

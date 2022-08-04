@@ -21,12 +21,16 @@ export function BookDetail() {
             })
     }, [id])
 
+    console.log(book?.fileEncodeDataURL)
+
     return (
         <div>
             <h2 className="page-header">{book?.title}</h2>
             <div className="book-details">
                 <div>
-                    <img className="book-cover" src={book && getCoverImagePath(book.coverImage.data)} />
+                    {/* <img className="book-cover" src={book && getCoverImagePath(book.coverImage.data)} /> */}
+                    <img loading="lazy" className="book-cover" src={book && book.fileEncodeDataURL} />
+                    
                     <div className="book-details-btn-grid">
                         <Link className="btn btn-primary"
                             to="/books/<%= book.id %>/edit">Edit</Link>

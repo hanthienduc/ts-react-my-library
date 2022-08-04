@@ -13,8 +13,10 @@ export function BookGrid({ books: books, large }: BookGridProps) {
 
     const bookElements = books.map(book => {
         return <Link key={nanoid()} to={`/books/${book._id}`}>
-            <img className={`book-cover ${bookCoverClass}`}
-                src={getCoverImagePath(book.coverImage.data)} />
+            {/* <img className={`book-cover ${bookCoverClass}`}
+                src={getCoverImagePath(book.coverImage.data)} /> */}
+            <img loading="lazy" className={`book-cover ${bookCoverClass}`}
+                src={book.fileEncodeDataURL} />
         </Link>
     })
     return (
