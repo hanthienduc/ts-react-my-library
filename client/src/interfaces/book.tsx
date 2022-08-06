@@ -4,8 +4,8 @@ export interface Book {
     _id: string,
     title: string,
     description: string,
-    publishDate: Date,
+    publishDate: string,
     pageCount: number,
-    fileEncodeDataURL: string
+    imageUrl: string
     author: Author 
 }

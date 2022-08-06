@@ -1,13 +1,9 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Author } from "../interfaces/Author";
 import { api_base } from "../utilities/apiUrl";
 type AuthorContextProviderProps = {
     children: ReactNode
-}
-
-export interface Author {
-    _id: string,
-    name: string
 }
 
 type AuthorContext = {

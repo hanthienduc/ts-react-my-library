@@ -42,3 +42,11 @@ body {
 .error-message {
   color: hsl(var(--color-danger-hue), 100%, 50%)
 }
+
+a {
+  text-decoration: none;
+  color: white;
+}
+a:hover{
+  color: hsl(var(--color-primary-hue), 100%, 50%);
+}

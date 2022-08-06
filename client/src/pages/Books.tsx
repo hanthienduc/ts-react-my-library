@@ -56,6 +56,7 @@ export function Books() {
                     <div className="form-item">
                         <label>Title</label>
                         <input
+                            required
                             type="text"
                             name="title"
                             value={searchData.title}

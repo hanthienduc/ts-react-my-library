@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Book } from "../interfaces/Book";
 import { api_base } from "../utilities/apiUrl";
 
@@ -17,6 +18,8 @@ function BookContextProvider({ children }: BookContextProvider) {
 
     const [books, setBooks] = useState<Book[]>([])
 
+    const navigate = useNavigate()
+
     useEffect(() => {
         getBooks()
     }, [])
@@ -28,8 +31,13 @@ function BookContextProvider({ children }: BookContextProvider) {
             .catch(err => console.log(err))
     }
 
-    function deleteBookItem(id: string){
-        
+    async function deleteBookItem(id: string){
+        if (id !== undefined) {
+            const data = await fetch(`${api_base}books/delete/${id}`,
+                { method: 'DELETE' }).then(res => res.json())
+            setBooks(book => book.filter(book => book._id !== data.id))
+            navigate(`/books`, { replace: true })
+        }
     }
 
     return (

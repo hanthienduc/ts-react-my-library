@@ -3,8 +3,6 @@ import { Link, useParams } from "react-router-dom"
 import { BookContext } from "../../context/BookContext"
 import { Book } from "../../interfaces/Book"
 import { api_base } from "../../utilities/apiUrl"
-import { getCoverImagePath } from "../../utilities/getCoverImagePath"
-
 export function BookDetail() {
 
     const { id } = useParams()
@@ -21,19 +19,16 @@ export function BookDetail() {
             })
     }, [id])
 
-    console.log(book?.fileEncodeDataURL)
 
     return (
         <div>
             <h2 className="page-header">{book?.title}</h2>
             <div className="book-details">
-                <div>
-                    {/* <img className="book-cover" src={book && getCoverImagePath(book.coverImage.data)} /> */}
-                    <img loading="lazy" className="book-cover" src={book && book.fileEncodeDataURL} />
-                    
+                <div className="book-details-left">
+                    {book?.imageUrl && <img loading="lazy" className="book-cover" src={book && book.imageUrl} />}
                     <div className="book-details-btn-grid">
                         <Link className="btn btn-primary"
-                            to="/books/<%= book.id %>/edit">Edit</Link>
+                            to={`/books/${book?._id}/edit`}>Edit</Link>
                         {book && <button onClick={() => deleteBookItem(book?._id)}
                             className="btn btn-danger" type="submit">Delete</button>}
                         <Link className="btn btn-primary book-details-author-button"
